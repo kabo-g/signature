@@ -7,7 +7,7 @@ from .models import ServerRoom
 class ServerRoomForm(forms.ModelForm, forms.Form):
 
 
-    signature = JSignatureField(widget = JSignatureWidget(jsignature_attrs = {"color" : "#CCC"}))
+    signature = JSignatureField(widget = JSignatureWidget(jsignature_attrs = {"color" : "#000"}))
 
     class Meta:
         model = ServerRoom

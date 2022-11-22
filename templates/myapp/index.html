@@ -5,5 +5,16 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+  <div class="container mt-5">
 
+    {{ form.media }}
+    <form class="form-group pt-3" method="post" enctype="multipart/form-data">
+      <hr>
+      {% csrf_token %}
+
+      {{ form | crispy }}
+
+      <input type="submit" name="save" value="save">
+    </form>
+  </div>
 {% endblock content %}

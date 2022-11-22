@@ -4,8 +4,11 @@ from jsignature.widgets import JSignatureWidget
 
 from .models import ServerRoom
 
-class ServerRoomForm(forms.ModelForm):
+class ServerRoomForm(forms.ModelForm, forms.Form):
+
+
+    signature = JSignatureField(widget = JSignatureWidget(jsignature_attrs = {"color" : "#CCC"}))
 
     class Meta:
         model = ServerRoom
-        fields = "__all__"
+        fields = ["first_name", "last_name", "phone_no", "company", "date", "time_in", "time_out", "signature"]

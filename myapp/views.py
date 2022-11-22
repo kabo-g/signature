@@ -47,7 +47,7 @@ def myview(request):
 
         # As an image
         if signature:
-            signature_picture = draw_signature(signature)
+            # signature_picture = draw_signature(signature)
 
             # As a file path
             signature_filepath = draw_signature(signature, as_file=True)

@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import View
 from django.contrib import messages
 
+import json
+
 from jsignature.utils import draw_signature
 from .models import ServerRoom
 from .forms import ServerRoomForm
@@ -13,28 +15,11 @@ from .forms import ServerRoomForm
 class SignatureView(View):
 
     model = ServerRoom.objects.all()
-    template_name = "myapp/index.html"
+    template_name = "myapp/results.html"
     form = ServerRoomForm
 
     def get(self, request, *args, **kwargs):
         context = {"data" : self.model}
-        return render(request, self.template_name)
-
-
-    def post(self, request, *args, **kwargs):
-        self.form = self.form(request.POST or None)
-
-        if self.form.is_valid():
-            signature = self.form.cleaned_data.get('signature')
-
-            # As an image
-            if signature:
-                signature_picture = draw_signature(signature)
-
-                # As a file path
-                signature_filepath = draw_signature(signature, as_file=True)
-        context = {"form" : self.form}
-
         return render(request, self.template_name, context)
 
 
@@ -47,12 +32,12 @@ def myview(request):
 
         # As an image
         if signature:
-            # signature_picture = draw_signature(signature)
+            signature_picture = draw_signature(signature)
 
             # As a file path
             signature_filepath = draw_signature(signature, as_file=True)
 
             form.save()
-            return redirect("/")
+            return redirect("home")
     context = {"server_room" : model, "form":form}
     return render(request, "myapp/index.html", context)

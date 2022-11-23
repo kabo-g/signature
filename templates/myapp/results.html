@@ -1,0 +1,16 @@
+{% extends '../base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% load jsignature_filters %}
+
+{% block content %}
+  <div class="container mt-5">
+      <h2>results</h2>
+
+    <img src="data:image/png;base64,{{ data.signature.url|signature_base64 }}" alt="{{ data }}" />
+
+  </div>
+{% endblock content %}
